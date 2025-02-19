@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.kibocommerce.bpm</groupId>
   <artifactId>kibo-fulfillment-workflows</artifactId>
-  <version>1.2506.0-SNAPSHOT</version>
+  <version>1.2508.0-SNAPSHOT</version>
   <packaging>kjar</packaging>
   <name>kibo-fulfillment-workflows</name>
   <description></description>
