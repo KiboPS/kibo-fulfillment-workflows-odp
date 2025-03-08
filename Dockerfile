@@ -47,6 +47,7 @@ ARG MAVEN_OPTS
 ENV MAVEN_OPTS=$MAVEN_OPTS
 RUN echo "use java 17+ for sonar scan" \
  && echo "BUILD_VERSION=$BUILD_VERSION SONAR_SCAN=$SONAR_SCAN MAVEN_OPTS=$MAVEN_OPTS" \
+ && bash ./set-deploy-version.sh \
  && chmod 755 ./sonarscanner/sonarnet.sh \
  && ./sonarscanner/sonarnet.sh mvn validate
 
