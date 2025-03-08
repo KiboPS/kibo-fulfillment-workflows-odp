@@ -32,6 +32,7 @@ ARG MAVEN_OPTS
 ENV MAVEN_OPTS="$MAVEN_OPTS -DskipTests=$SKIP_TESTS -Dmaven.test.failure.ignore=true"
 RUN mkdir -p /build/target/surefire-reports /build/target/jacoco-aggregate \
  && echo "BUILD_VERSION=$BUILD_VERSION SKIP_TESTS=$SKIP_TESTS MAVEN_OPTS=$MAVEN_OPTS" \
+ && bash ./set-deploy-version.sh \
  && mvn -B -e -s maven_settings.xml verify
 
 # Analyze source code using Java 17 and injected sonar scanner script
