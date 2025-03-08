@@ -4,7 +4,7 @@
       <include>true</include>
       <metadata>
         <id>ng-releases</id>
-        <url>http://ng-repo.dev.kibocommerce.com:8081/repository/ng-maven-releases/</url>
+        <url>https://nexus.kibo-dev-ext.com/repository/ng-maven-releases/</url>
         <source>SETTINGS</source>
       </metadata>
     </repository>
@@ -12,7 +12,7 @@
       <include>true</include>
       <metadata>
         <id>ng-snapshots</id>
-        <url>http://ng-repo.dev.kibocommerce.com:8081/repository/ng-maven-snapshots/</url>
+        <url>https://nexus.kibo-dev-ext.com/repository/ng-maven-snapshots/</url>
         <source>SETTINGS</source>
       </metadata>
     </repository>
@@ -36,7 +36,7 @@
       <include>true</include>
       <metadata>
         <id>ng-central</id>
-        <url>http://ng-repo.dev.kibocommerce.com:8081/repository/ng-maven-central/</url>
+        <url>https://nexus.kibo-dev-ext.com/repository/ng-maven-central/</url>
         <source>SETTINGS</source>
       </metadata>
     </repository>

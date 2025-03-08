@@ -8,3 +8,4 @@
 **/target/
 !**/set-deploy-version.sh
 !**/sonarscanner/sonarnet.sh
+!**/deploy.sh

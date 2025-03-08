@@ -210,12 +210,12 @@
         <snapshotRepository>
           <id>kibo-businessautomation-snapshots</id>
           <name>Kibo BusinessAutomation Snapshots</name>
-          <url>http://ng-repo.dev.kibocommerce.com:8081/repository/kibo-businessautomation-snapshots</url>
+          <url>https://nexus.kibo-dev-ext.com/repository/kibo-businessautomation-snapshots</url>
         </snapshotRepository>
         <repository>
           <id>kibo-businessautomation-releases</id>
           <name>Kibo BusinessAutomation Releases</name>
-          <url>http://ng-repo.dev.kibocommerce.com:8081/repository/kibo-businessautomation-releases</url>
+          <url>https://nexus.kibo-dev-ext.com/repository/kibo-businessautomation-releases</url>
         </repository>
       </distributionManagement>
     </profile>
