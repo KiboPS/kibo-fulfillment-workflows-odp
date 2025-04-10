@@ -26,3 +26,6 @@
 
 ### Process ID Files (e.g. docker.pid) ###
 *.pid
+
+**/.vscode
+**/*.code-workspace
