@@ -3,25 +3,9 @@
     <repository>
       <include>true</include>
       <metadata>
-        <id>ng-releases</id>
-        <url>https://nexus.kibo-dev-ext.com/repository/ng-maven-releases/</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>ng-snapshots</id>
-        <url>https://nexus.kibo-dev-ext.com/repository/ng-maven-snapshots/</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>maven.java.net</id>
-        <url>http://download.java.net/maven/2</url>
-        <source>SETTINGS</source>
+        <id>local</id>
+        <url>C:\Users\Venkatesh.Rao/.m2/repository</url>
+        <source>LOCAL</source>
       </metadata>
     </repository>
     <repository>
@@ -30,22 +14,6 @@
         <id>central</id>
         <url>https://repo.maven.apache.org/maven2</url>
         <source>PROJECT</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>ng-central</id>
-        <url>https://nexus.kibo-dev-ext.com/repository/ng-maven-central/</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>local</id>
-        <url>/opt/jboss/.m2/repository</url>
-        <source>LOCAL</source>
       </metadata>
     </repository>
   </repositories>
