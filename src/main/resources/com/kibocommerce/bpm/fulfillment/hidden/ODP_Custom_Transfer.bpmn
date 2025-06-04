@@ -353,7 +353,6 @@ kcontext.setVariable("currentState","PARTIAL_INVENTORY_NOPE");
 } else {
 kcontext.setVariable("currentState","INVENTORY_NOPE");
 }
-<<<<<<< HEAD
 ]]></drools:script>
         </drools:onExit-script>
       </bpmn2:extensionElements>
@@ -423,77 +422,6 @@ kcontext.setVariable("currentState","INVENTORY_NOPE");
 ]]></drools:script>
         </drools:onEntry-script>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
-=======
-]]></drools:script>
-        </drools:onExit-script>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>_33E1114A-8802-4DEE-85F6-6D88EEDC3814</bpmn2:incoming>
-      <bpmn2:outgoing>_080D3BEA-E4D3-45A1-BFC0-64DBCD56DDF8</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_WNLSGUDyEfCaUZRnfm8w3A">
-        <bpmn2:dataInput id="_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_TaskNameInputXItem" name="TaskName"/>
-        <bpmn2:dataInput id="_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_SkippableInputX" drools:dtype="Object" itemSubjectRef="__473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_SkippableInputXItem" name="Skippable"/>
-        <bpmn2:dataInput id="_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_PriorityInputX" drools:dtype="Object" itemSubjectRef="__473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_PriorityInputXItem" name="Priority"/>
-        <bpmn2:dataOutput id="_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_stockLevelOutputX" drools:dtype="String" itemSubjectRef="__473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_stockLevelOutputXItem" name="stockLevel"/>
-        <bpmn2:inputSet id="_WNLSGkDyEfCaUZRnfm8w3A">
-          <bpmn2:dataInputRefs>_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_TaskNameInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_SkippableInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_PriorityInputX</bpmn2:dataInputRefs>
-        </bpmn2:inputSet>
-        <bpmn2:outputSet id="_WNLSG0DyEfCaUZRnfm8w3A">
-          <bpmn2:dataOutputRefs>_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_stockLevelOutputX</bpmn2:dataOutputRefs>
-        </bpmn2:outputSet>
-      </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_WNLSHEDyEfCaUZRnfm8w3A">
-        <bpmn2:targetRef>_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_TaskNameInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_WNLSHUDyEfCaUZRnfm8w3A">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_WNLSHkDyEfCaUZRnfm8w3A"><![CDATA[ValidateIncomingTransferUserTask]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_WNLSH0DyEfCaUZRnfm8w3A">_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_TaskNameInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_WNLSIEDyEfCaUZRnfm8w3A">
-        <bpmn2:targetRef>_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_SkippableInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_WNLSIUDyEfCaUZRnfm8w3A">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_WNLSIkDyEfCaUZRnfm8w3A"><![CDATA[false]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_WNLSI0DyEfCaUZRnfm8w3A">_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_SkippableInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="_WNLSJEDyEfCaUZRnfm8w3A">
-        <bpmn2:targetRef>_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_PriorityInputX</bpmn2:targetRef>
-        <bpmn2:assignment id="_WNLSJUDyEfCaUZRnfm8w3A">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_WNLSJkDyEfCaUZRnfm8w3A"><![CDATA[600]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_WNLSJ0DyEfCaUZRnfm8w3A">_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_PriorityInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="_WNLSKEDyEfCaUZRnfm8w3A">
-        <bpmn2:sourceRef>_473F6DAC-3774-42A1-A4A2-F1BFE2EB3855_stockLevelOutputX</bpmn2:sourceRef>
-        <bpmn2:targetRef>stockLevel</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
-      <bpmn2:potentialOwner id="_6455273a-0e6f-47f0-9e5b-90ee83f0bd86">
-        <bpmn2:resourceAssignmentExpression id="_WNLSKUDyEfCaUZRnfm8w3A">
-          <bpmn2:formalExpression id="_WNLSKkDyEfCaUZRnfm8w3A">#{initiator}</bpmn2:formalExpression>
-        </bpmn2:resourceAssignmentExpression>
-      </bpmn2:potentialOwner>
-    </bpmn2:userTask>
-    <bpmn2:scriptTask id="_97008EEE-AE16-465C-9B90-1E5452890203" name="Split Shipment" scriptFormat="http://www.java.com/java">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Split Shipment]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>_639DA269-7B3D-4ADE-B276-F9486C31574F</bpmn2:incoming>
-      <bpmn2:outgoing>_ADDCE619-C3C4-4F0B-8129-D14B4DDD452B</bpmn2:outgoing>
-    </bpmn2:scriptTask>
-    <bpmn2:userTask id="_F03E5DD9-DB93-4F63-8220-BA5B5CE60065" name="Validate Items In Stock">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Validate Items In Stock]]></drools:metaValue>
-        </drools:metaData>
-        <drools:onEntry-script scriptFormat="http://www.java.com/java">
-          <drools:script><![CDATA[kcontext.setVariable("pickable",true);
-]]></drools:script>
-        </drools:onEntry-script>
-        <drools:onExit-script scriptFormat="http://www.java.com/java">
->>>>>>> master
           <drools:script><![CDATA[if ("IN_STOCK".equals(stockLevel)) {
 kcontext.setVariable("currentState","INVENTORY_AVAILABLE");
 } else if ("PARTIAL_STOCK".equals(stockLevel)) {
@@ -502,7 +430,6 @@ kcontext.setVariable("currentState","PARTIAL_INVENTORY_NOPE");
 kcontext.setVariable("currentState","INVENTORY_NOPE");
 }
 kcontext.setVariable("pickable",false);
-<<<<<<< HEAD
 ]]></drools:script>
         </drools:onExit-script>
       </bpmn2:extensionElements>
@@ -1357,4 +1284,3 @@ kcontext.setVariable("currentState", "ACCEPTED_SHIPMENT");
     <bpmn2:target>_WNLSAEDyEfCaUZRnfm8w3A</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
->>>>>>> master
