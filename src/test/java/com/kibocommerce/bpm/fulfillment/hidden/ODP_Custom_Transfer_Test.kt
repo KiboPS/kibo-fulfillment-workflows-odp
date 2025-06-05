@@ -17,16 +17,37 @@ class ODP_Custom_Transfer_Test : JbpmJUnitBaseTestCase(true, false) {
 
     @Before
     fun init() {
-        createRuntimeManager("com/kibocommerce/bpm/fulfillment/ODP_Custom_Transfer.bpmn")
+        createRuntimeManager("com/kibocommerce/bpm/fulfillment/hidden/ODP_Custom_Transfer.bpmn")
         val runtimeEngine = getRuntimeEngine(null)
         kieSession = runtimeEngine.kieSession
         taskService = runtimeEngine.taskService
     }
 
     @Test
+    fun acceptShipment_true() {
+        val wpi = createProcess()
+
+        acceptShipment(wpi, true)
+
+        assertNodeActive(wpi.id, kieSession, "Validate Items In Stock")
+        assertCurrentState(wpi, "ACCEPTED_SHIPMENT")
+    }
+
+    @Test
+    fun acceptShipment_false() {
+        val wpi = createProcess()
+
+        acceptShipment(wpi, false)
+
+        assertProcessInstanceActive(wpi.id, kieSession)
+        assertCurrentState(wpi, "PRE_ACCEPT_SHIPMENT")
+    }
+
+    @Test
     fun validateStock_inStock() {
         val wpi = createProcess()
 
+        acceptShipment(wpi, true)
         validateStock(wpi, "IN_STOCK", null)
 
         assertNodeActive(wpi.id, kieSession, "Print Packing Slip")
@@ -36,7 +57,8 @@ class ODP_Custom_Transfer_Test : JbpmJUnitBaseTestCase(true, false) {
     @Test
     fun validateStock_partialStock() {
         val wpi = createProcess()
-
+        
+        acceptShipment(wpi, true)
         validateStock(wpi, "PARTIAL_STOCK", null)
 
         assertNodeActive(wpi.id, kieSession, "Print Packing Slip")
@@ -47,6 +69,7 @@ class ODP_Custom_Transfer_Test : JbpmJUnitBaseTestCase(true, false) {
     fun validateStock_noStock() {
         val wpi = createProcess()
 
+        acceptShipment(wpi, true)
         validateStock(wpi, "NO_STOCK", null)
 
         assertProcessInstanceNotActive(wpi.id, kieSession)
@@ -57,55 +80,21 @@ class ODP_Custom_Transfer_Test : JbpmJUnitBaseTestCase(true, false) {
     fun printPackingSlip() {
         val wpi = createProcess()
 
+        acceptShipment(wpi, true)
         validateStock(wpi, "IN_STOCK", null)
         printPackingSlip(wpi, null)
-
-        assertNodeActive(wpi.id, kieSession, "Prepare for Shipment")
-        assertCurrentState(wpi, "PREPARE_FOR_SHIPMENT")
-    }
-
-    @Test
-    fun printPackingSlip_goBack() {
-        val wpi = createProcess()
-
-        validateStock(wpi, "IN_STOCK", null)
-        printPackingSlip(wpi, true)
-
-        assertNodeActive(wpi.id, kieSession, "Validate Items In Stock")
-        assertCurrentState(wpi, "ACCEPTED_SHIPMENT")
-    }
-
-    @Test
-    fun prepareForShipment() {
-        val wpi = createProcess()
-
-        validateStock(wpi, "IN_STOCK", null)
-        printPackingSlip(wpi, null)
-        prepareForShipment(wpi, null)
 
         assertNodeActive(wpi.id, kieSession, "Validate Incoming Transfer")
         assertCurrentState(wpi, "VALIDATE_INCOMING_TRANSFER")
     }
 
     @Test
-    fun prepareForShipment_goBack() {
-        val wpi = createProcess()
-
-        validateStock(wpi, "IN_STOCK", null)
-        printPackingSlip(wpi, null)
-        prepareForShipment(wpi, true)
-
-        assertNodeActive(wpi.id, kieSession, "Print Packing Slip")
-        assertCurrentState(wpi, "INVENTORY_AVAILABLE")
-    }
-
-    @Test
     fun validateIncomingTransfer_inStock() {
         val wpi = createProcess()
 
+        acceptShipment(wpi, true)
         validateStock(wpi, "IN_STOCK", null)
         printPackingSlip(wpi, null)
-        prepareForShipment(wpi, null)
         validateIncomingTransfer(wpi, "IN_STOCK")
 
         assertProcessInstanceNotActive(wpi.id, kieSession)
@@ -116,9 +105,9 @@ class ODP_Custom_Transfer_Test : JbpmJUnitBaseTestCase(true, false) {
     fun validateIncomingTransfer_partialStock() {
         val wpi = createProcess()
 
+        acceptShipment(wpi, true)
         validateStock(wpi, "IN_STOCK", null)
         printPackingSlip(wpi, null)
-        prepareForShipment(wpi, null)
         validateIncomingTransfer(wpi, "PARTIAL_STOCK")
         wpi.signalEvent("next", null)
 
@@ -130,21 +119,13 @@ class ODP_Custom_Transfer_Test : JbpmJUnitBaseTestCase(true, false) {
     fun validateIncomingTransfer_noStock() {
         val wpi = createProcess()
 
+        acceptShipment(wpi, true)
         validateStock(wpi, "IN_STOCK", null)
         printPackingSlip(wpi, null)
-        prepareForShipment(wpi, null)
         validateIncomingTransfer(wpi, "NO_STOCK")
 
         assertProcessInstanceNotActive(wpi.id, kieSession)
         assertCurrentState(wpi, "REASSIGN_SHIPMENT")
-    }
-
-    @Test
-    fun pick() {
-        val wpi = createProcess()
-        wpi.signalEvent("picked", null)
-        assertNodeActive(wpi.id, kieSession, "Prepare for Shipment")
-        assertCurrentState(wpi, "PREPARE_FOR_SHIPMENT")
     }
 
     @Test
@@ -179,22 +160,40 @@ class ODP_Custom_Transfer_Test : JbpmJUnitBaseTestCase(true, false) {
 
     private fun createProcess(): WorkflowProcessInstance {
         val processParam = mapOf("initiator" to "john")
-        val processInstance = kieSession!!.startProcess("fulfillment.ODP_Custom_Transfer", processParam)
+        val processInstance = kieSession!!.startProcess("ODP_Custom_Transfer", processParam)
 
         assertTrue(processInstance is WorkflowProcessInstance)
         assertNodeExists(
             processInstance,
+            "Accept Shipment",
             "Validate Items In Stock",
             "Print Packing Slip",
             "Prepare for Shipment",
             "Validate Incoming Transfer"
         )
-        assertNodeTriggered(processInstance.id, "Pre-Accept Shipment", "Validate Items In Stock")
-        assertEquals("ACCEPTED_SHIPMENT", processInstance.getVariable("currentState"))
+        assertNodeTriggered(processInstance.id, "Pre-Accept Shipment", "Accept Shipment")
+        assertEquals("PRE_ACCEPT_SHIPMENT", processInstance.getVariable("currentState"))
 
         logger.info("Created process {}", processInstance.processName)
         return processInstance
     }
+
+        private fun acceptShipment(wpi: WorkflowProcessInstance, shipmentAccepted: Boolean) {
+        val expectedTaskName = "Accept Shipment"
+
+        assertProcessInstanceActive(wpi.id, kieSession)
+        assertNodeActive(wpi.id, kieSession, expectedTaskName)
+
+        val tasks = taskService!!.getTasksByStatusByProcessInstanceId(wpi.id, listOf(Status.Reserved), "en-UK")
+        assertEquals(1, tasks.size)
+        val task = tasks[0]
+        assertEquals(expectedTaskName, task.name)
+
+        taskService!!.start(task.id, "john")
+        val data = mapOf("shipmentAccepted" to shipmentAccepted)
+        taskService!!.complete(task.id, "john", data)
+    }
+
 
     private fun validateStock(wpi: WorkflowProcessInstance, stockLevel: String, createTransfer: Boolean?) {
         val expectedTaskName = "Validate Items In Stock"

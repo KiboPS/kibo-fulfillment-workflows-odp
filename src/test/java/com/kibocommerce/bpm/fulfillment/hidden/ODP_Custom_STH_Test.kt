@@ -17,7 +17,7 @@ class ODP_Custom_STH_Test : JbpmJUnitBaseTestCase(true, false) {
 
     @Before
     fun init() {
-        createRuntimeManager("com/kibocommerce/bpm/fulfillment/ODP_Custom_STH.bpmn")
+        createRuntimeManager("com/kibocommerce/bpm/fulfillment/hidden/ODP_Custom_STH.bpmn")
         val runtimeEngine = getRuntimeEngine(null)
         kieSession = runtimeEngine.kieSession
         taskService = runtimeEngine.taskService
@@ -95,7 +95,7 @@ class ODP_Custom_STH_Test : JbpmJUnitBaseTestCase(true, false) {
         validateStock(wpi, "NO_STOCK", true)
         waitForTransfer(wpi)
 
-        assertNodeActive(wpi.id, kieSession, "Print Packing Slip")
+        assertNodeActive(wpi.id, kieSession, "Accept Shipment")
         assertCurrentState(wpi, "ALL_TRANSFERS_RECEIVED")
     }
 
@@ -109,18 +109,6 @@ class ODP_Custom_STH_Test : JbpmJUnitBaseTestCase(true, false) {
 
         assertNodeActive(wpi.id, kieSession, "Prepare for Shipment")
         assertCurrentState(wpi, "PRINTED_PACKING_SLIP")
-    }
-
-    @Test
-    fun printPackingSlip_goBack() {
-        val wpi = createProcess()
-
-        acceptShipment(wpi, true)
-        validateStock(wpi, "IN_STOCK", false)
-        printPackingSlip(wpi, true)
-
-        assertNodeActive(wpi.id, kieSession, "Validate Items In Stock")
-        assertCurrentState(wpi, "ACCEPTED_SHIPMENT")
     }
 
     @Test
