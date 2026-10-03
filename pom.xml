@@ -31,7 +31,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
     <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-    <jackson.version>2.9.7</jackson.version>
+    <jackson.version>2.18.11</jackson.version>
     <kotlin.version>1.5.10</kotlin.version>
     <jacocoOutputDirectory>${project.build.directory}/jacoco-aggregate</jacocoOutputDirectory>
     <sonar.organization>kibo-ucp</sonar.organization>
